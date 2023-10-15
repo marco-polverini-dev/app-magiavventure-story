@@ -12,6 +12,5 @@ public interface StoryMapper {
 
     @Mapping(target = "id", ignore = true)
     EStory mapPost(StoryPost storyPost);
-    EStory mapEntity(Story story);
     Story map(EStory eStory);
 }

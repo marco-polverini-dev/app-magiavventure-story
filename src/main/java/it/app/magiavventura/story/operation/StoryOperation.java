@@ -2,7 +2,6 @@ package it.app.magiavventura.story.operation;
 
 import it.app.magiavventura.story.model.Story;
 import it.app.magiavventura.story.model.StoryPost;
-import it.app.magiavventura.story.repository.entity.EStory;
 import it.app.magiavventura.story.service.StoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
