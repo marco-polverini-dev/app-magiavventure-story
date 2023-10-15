@@ -1,7 +1,7 @@
 package it.app.magiavventura.story.operation;
 
 import it.app.magiavventura.story.model.Story;
-import it.app.magiavventura.story.model.post.StoryPost;
+import it.app.magiavventura.story.model.StoryPost;
 import it.app.magiavventura.story.repository.entity.EStory;
 import it.app.magiavventura.story.service.StoryService;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ public class StoryOperation {
     private final StoryService storyService;
 
     @GetMapping(path = "")
-    public Page<EStory> searchStories() {
-        return storyService.findAll();
+    public Page<Story> searchStories(@RequestHeader(defaultValue = "0") Integer pageNumber) {
+        return storyService.findAll(pageNumber);
     }
 
     @PostMapping

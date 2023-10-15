@@ -1,7 +1,7 @@
 package it.app.magiavventura.story.mapper;
 
 import it.app.magiavventura.story.model.Story;
-import it.app.magiavventura.story.model.post.StoryPost;
+import it.app.magiavventura.story.model.StoryPost;
 import it.app.magiavventura.story.repository.entity.EStory;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

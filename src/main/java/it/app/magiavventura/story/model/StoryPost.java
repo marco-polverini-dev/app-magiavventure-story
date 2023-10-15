@@ -1,9 +1,10 @@
-package it.app.magiavventura.story.model.post;
+package it.app.magiavventura.story.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.util.Date;
 import java.util.List;
@@ -12,17 +13,18 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StoryPost {
-    @NonNull
+    @NotNull
     private String title;
     private String subtitle;
-    @NonNull
+    @NotNull
     private String text;
-    @NonNull
+    @NotNull
     private String author;
-    @NonNull
+    @NotNull
     private Date creationDate;
     private Date approvationDate;
-    @NonNull
+    @NotNull
+    @NotEmpty
     private List<String> categories;
     private String age;
 }
