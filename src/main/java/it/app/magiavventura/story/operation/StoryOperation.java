@@ -1,28 +1,27 @@
 package it.app.magiavventura.story.operation;
 
-import it.app.magiavventura.story.repository.entity.Story;
+import it.app.magiavventura.story.model.Story;
+import it.app.magiavventura.story.model.post.StoryPost;
+import it.app.magiavventura.story.repository.entity.EStory;
 import it.app.magiavventura.story.service.StoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @AllArgsConstructor
-@RequestMapping("/api/v1/story")
+@RequestMapping("/v1/story")
 public class StoryOperation {
 
     private final StoryService storyService;
 
-    @GetMapping
-    public Story getHello() {
-        return storyService.saveStory();
+    @GetMapping(path = "")
+    public Page<EStory> searchStories() {
+        return storyService.findAll();
     }
 
-    @GetMapping(path = "/all")
-    public List<Story> getAll() {
-        return storyService.findAll();
+    @PostMapping
+    public Story addStory(@RequestBody StoryPost storyPost) {
+        return storyService.saveStory(storyPost);
     }
 }

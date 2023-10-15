@@ -1,31 +1,28 @@
-package it.app.magiavventura.story.repository.entity;
+package it.app.magiavventura.story.model.post;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NonNull;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Builder
-@AllArgsConstructor
-@Document(collection = "story")
-public class Story {
-
-    @Id()
-    private UUID id;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class StoryPost {
+    @NonNull
     private String title;
     private String subtitle;
+    @NonNull
     private String text;
+    @NonNull
     private String author;
+    @NonNull
     private Date creationDate;
     private Date approvationDate;
+    @NonNull
     private List<String> categories;
     private String age;
-
 }
