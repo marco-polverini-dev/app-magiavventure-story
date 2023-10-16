@@ -1,6 +1,5 @@
 package it.app.magiavventura.story.service;
 
-import com.mongodb.BasicDBList;
 import it.app.magiavventura.story.configuration.StoryProperties;
 import it.app.magiavventura.story.mapper.StoryMapper;
 import it.app.magiavventura.story.model.Story;
@@ -16,11 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
