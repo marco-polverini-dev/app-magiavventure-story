@@ -8,11 +8,13 @@ import it.app.magiavventura.story.repository.StoryRepository;
 import it.app.magiavventura.story.repository.entity.EStory;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.Optional;
@@ -39,11 +41,20 @@ public class StoryService {
         var pageable = PageRequest.of(pageNumber, pageableProperties.getPageSize(),
                 Sort.by(Sort.Direction.valueOf(pageableProperties.getSort().getDirection()),
                         pageableProperties.getSort().getProperties()));
-        return storyRepository.findAll(pageable).map(storyMapper::map);
+        var example = Example.of(EStory.builder().active(true).build());
+        return storyRepository.findAll(example, pageable).map(storyMapper::map);
+    }
+
+    public Story findById(UUID id) {
+        return storyRepository
+                .findById(id)
+                .map(storyMapper::map)
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404)));
     }
 
     private EStory generateId(EStory eStory) {
         eStory.setId(UUID.randomUUID());
+        eStory.setActive(Boolean.TRUE);
         return eStory;
     }
 }

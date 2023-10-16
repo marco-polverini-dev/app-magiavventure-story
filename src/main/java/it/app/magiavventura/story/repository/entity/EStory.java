@@ -27,6 +27,7 @@ public class EStory {
     private String author;
     private Date creationDate;
     private Date approvationDate;
+    private Boolean active;
     private List<String> categories;
     private String age;
 

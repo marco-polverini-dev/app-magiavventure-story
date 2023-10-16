@@ -26,6 +26,7 @@ public class Story {
     @NotNull
     private Date creationDate;
     private Date approvationDate;
+    private Boolean active;
     @NotNull
     @NotEmpty
     private List<String> categories;

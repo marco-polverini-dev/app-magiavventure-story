@@ -11,6 +11,7 @@ import org.mapstruct.MappingConstants;
 public interface StoryMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "active", ignore = true)
     EStory mapPost(StoryPost storyPost);
     Story map(EStory eStory);
 }
