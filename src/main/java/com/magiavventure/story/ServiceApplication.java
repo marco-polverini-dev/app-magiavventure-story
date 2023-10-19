@@ -1,4 +1,4 @@
-package it.app.magiavventura.story;
+package com.magiavventure.story;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

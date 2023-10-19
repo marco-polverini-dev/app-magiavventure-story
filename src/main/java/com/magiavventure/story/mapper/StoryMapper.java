@@ -1,9 +1,9 @@
-package it.app.magiavventura.story.mapper;
+package com.magiavventure.story.mapper;
 
-import it.app.magiavventura.story.model.Story;
-import it.app.magiavventura.story.model.StoryPost;
-import it.app.magiavventura.story.model.StorySearch;
-import it.app.magiavventura.story.repository.entity.EStory;
+import com.magiavventure.story.model.StoryPost;
+import com.magiavventure.story.repository.entity.EStory;
+import com.magiavventure.story.model.Story;
+import com.magiavventure.story.model.StorySearch;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

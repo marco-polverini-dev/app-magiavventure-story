@@ -1,12 +1,12 @@
-package it.app.magiavventura.story.service;
+package com.magiavventure.story.service;
 
-import it.app.magiavventura.story.configuration.StoryProperties;
-import it.app.magiavventura.story.mapper.StoryMapper;
-import it.app.magiavventura.story.model.Story;
-import it.app.magiavventura.story.model.StoryPost;
-import it.app.magiavventura.story.model.StorySearch;
-import it.app.magiavventura.story.repository.StoryRepository;
-import it.app.magiavventura.story.repository.entity.EStory;
+import com.magiavventure.story.repository.StoryRepository;
+import com.magiavventure.story.repository.entity.EStory;
+import com.magiavventure.story.configuration.StoryProperties;
+import com.magiavventure.story.mapper.StoryMapper;
+import com.magiavventure.story.model.Story;
+import com.magiavventure.story.model.StoryPost;
+import com.magiavventure.story.model.StorySearch;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;

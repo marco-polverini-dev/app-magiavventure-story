@@ -1,4 +1,4 @@
-package it.app.magiavventura.story.configuration;
+package com.magiavventure.story.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,11 +1,10 @@
-package it.app.magiavventura.story.repository.entity;
+package com.magiavventure.story.model;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
@@ -13,21 +12,23 @@ import java.util.UUID;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Document(collection = "story")
-public class EStory {
-
-    @Id()
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Story {
+    @NotNull
     private UUID id;
-
+    @NotNull
     private String title;
     private String subtitle;
+    @NotNull
     private String text;
+    @NotNull
     private String author;
+    @NotNull
     private Date creationDate;
     private Date approvationDate;
     private Boolean active;
+    @NotNull
+    @NotEmpty
     private List<String> categories;
     private String age;
 

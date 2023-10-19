@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      database: magiavventura
+      database: magiavventure
       uuid-representation: standard
