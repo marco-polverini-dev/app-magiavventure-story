@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: magiavventure
+      uuid-representation: standard

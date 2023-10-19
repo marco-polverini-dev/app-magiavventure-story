@@ -1,3 +1,11 @@
 server:
   servlet:
     context-path: /api
+
+story:
+  search:
+    pageable:
+      pageSize: 3
+      sort:
+        direction: DESC
+        properties: creationDate, id

@@ -1,28 +1,22 @@
-package it.app.magiavventura.story.model.post;
+package com.magiavventure.story.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 
-import java.util.Date;
+
 import java.util.List;
 
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class StoryPost {
-    @NonNull
+public class StorySearch {
+
     private String title;
     private String subtitle;
-    @NonNull
     private String text;
-    @NonNull
     private String author;
-    @NonNull
-    private Date creationDate;
-    private Date approvationDate;
-    @NonNull
     private List<String> categories;
     private String age;
+
 }

@@ -1,6 +1,6 @@
-package it.app.magiavventura.story.repository;
+package com.magiavventure.story.repository;
 
-import it.app.magiavventura.story.repository.entity.EStory;
+import com.magiavventure.story.repository.entity.EStory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
