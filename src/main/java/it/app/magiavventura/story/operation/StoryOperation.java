@@ -5,15 +5,18 @@ import it.app.magiavventura.story.model.StoryPost;
 import it.app.magiavventura.story.model.StorySearch;
 import it.app.magiavventura.story.service.StoryService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController()
 @AllArgsConstructor
 @RequestMapping("/v1/story")
+@Slf4j
 public class StoryOperation {
 
     private final StoryService storyService;
@@ -24,7 +27,7 @@ public class StoryOperation {
                                      @RequestParam(required = false) String subtitle,
                                      @RequestParam(required = false) String text,
                                      @RequestParam(required = false) String author,
-                                     @RequestParam(required = false) List<String> categories,
+                                     @RequestParam(required = false) String category,
                                      @RequestParam(required = false) String age) {
         return storyService.findAll(pageNumber, StorySearch
                 .builder()
@@ -32,7 +35,7 @@ public class StoryOperation {
                 .subtitle(subtitle)
                 .text(text)
                 .author(author)
-                .categories(categories)
+                .categories(Objects.nonNull(category) ? List.of(category) : null)
                 .age(age)
                 .build());
     }
