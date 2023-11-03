@@ -47,10 +47,6 @@ public class StoryService {
         return storyRepository
                 .findById(id)
                 .map(storyMapper::map)
-                .map(story -> {
-                    log.error(String.join(",", story.getCategories()));
-                    return story;
-                })
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404)));
     }
 
