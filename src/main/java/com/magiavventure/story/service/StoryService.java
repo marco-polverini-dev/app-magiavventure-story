@@ -29,7 +29,7 @@ public class StoryService {
 
     public Story saveStory(StoryPost storyPost) {
         return Optional.ofNullable(storyMapper.mapPost(storyPost))
-                .map(this::generateId)
+                .map(EStory::generateId)
                 .map(storyRepository::save)
                 .map(storyMapper::map)
                 .orElseThrow(() -> new HttpServerErrorException(HttpStatusCode.valueOf(500)));
@@ -53,12 +53,6 @@ public class StoryService {
                     return story;
                 })
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404)));
-    }
-
-    private EStory generateId(EStory eStory) {
-        eStory.setId(UUID.randomUUID());
-        eStory.setActive(Boolean.TRUE);
-        return eStory;
     }
 
     @SuppressWarnings("unchecked")

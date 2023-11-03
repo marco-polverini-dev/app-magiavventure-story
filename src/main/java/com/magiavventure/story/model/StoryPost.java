@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,8 +21,8 @@ public class StoryPost {
     @NotNull
     private String author;
     @NotNull
-    private Date creationDate;
-    private Date approvationDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime approvationDate;
     @NotNull
     @NotEmpty
     private List<String> categories;
