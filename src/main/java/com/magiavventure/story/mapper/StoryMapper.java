@@ -15,7 +15,6 @@ public interface StoryMapper {
     @Mapping(target = "active", ignore = true)
     EStory mapPost(StoryPost storyPost);
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "active", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "approvationDate", ignore = true)
     EStory mapSearch(StorySearch story);

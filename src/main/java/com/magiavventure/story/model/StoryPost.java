@@ -1,13 +1,11 @@
 package com.magiavventure.story.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
@@ -24,7 +22,5 @@ public class StoryPost {
     private LocalDateTime creationDate;
     private LocalDateTime approvationDate;
     @NotNull
-    @NotEmpty
-    private List<String> categories;
-    private String age;
+    private String categories;
 }

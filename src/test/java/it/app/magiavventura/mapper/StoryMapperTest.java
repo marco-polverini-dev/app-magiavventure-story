@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 class StoryMapperTest {
@@ -20,56 +19,44 @@ class StoryMapperTest {
 
     @Test
     void mapTest_Ok() {
-        var eStoryFull = createEStory(true);
-        var eStoryWithoutCategories = createEStory(false);
+        var eStory = createEStory();
         EStory eStoryNull = null;
 
-        var storyFull = storyMapper.map(eStoryFull);
-        var storyWithoutCategories = storyMapper.map(eStoryWithoutCategories);
+        var story = storyMapper.map(eStory);
         var storyNull = storyMapper.map(eStoryNull);
 
-        Assertions.assertNotNull(storyFull);
-        assertStoryValues(eStoryFull, storyFull, true);
-        Assertions.assertNotNull(storyWithoutCategories);
-        assertStoryValues(eStoryWithoutCategories, storyWithoutCategories, false);
+        Assertions.assertNotNull(story);
+        assertStoryValues(eStory, story);
         Assertions.assertNull(storyNull);
     }
 
     @Test
     void mapSearchTest_Ok() {
-        var storySearchFull = createStorySearch(true);
-        var storySearchWithoutCategories = createStorySearch(false);
+        var storySearch = createStorySearch();
         StorySearch storySearchNull = null;
 
-        var eStoryFull = storyMapper.mapSearch(storySearchFull);
-        var eStoryWithoutCategories = storyMapper.mapSearch(storySearchWithoutCategories);
+        var eStory = storyMapper.mapSearch(storySearch);
         var eStoryNull = storyMapper.mapSearch(storySearchNull);
 
-        Assertions.assertNotNull(eStoryFull);
-        assertEStoryValues(storySearchFull, eStoryFull, true);
-        Assertions.assertNotNull(eStoryWithoutCategories);
-        assertEStoryValues(storySearchWithoutCategories, eStoryWithoutCategories, false);
+        Assertions.assertNotNull(eStory);
+        assertEStoryValues(storySearch, eStory);
         Assertions.assertNull(eStoryNull);
     }
 
     @Test
     void mapPostTest_Ok() {
-        var storyPostFull = createStoryPost(true);
-        var storyPostWithoutCategories = createStoryPost(false);
+        var storyPost = createStoryPost();
         StoryPost storyPostNull = null;
 
-        var eStoryFull = storyMapper.mapPost(storyPostFull);
-        var eStoryWithoutCategories = storyMapper.mapPost(storyPostWithoutCategories);
+        var eStory = storyMapper.mapPost(storyPost);
         var eStoryNull = storyMapper.mapPost(storyPostNull);
 
-        Assertions.assertNotNull(eStoryFull);
-        assertEStoryValues(storyPostFull, eStoryFull, true);
-        Assertions.assertNotNull(eStoryWithoutCategories);
-        assertEStoryValues(storyPostWithoutCategories, eStoryWithoutCategories, false);
+        Assertions.assertNotNull(eStory);
+        assertEStoryValues(storyPost, eStory);
         Assertions.assertNull(eStoryNull);
     }
 
-    private void assertStoryValues(EStory expected, Story actual, boolean hasCategories) {
+    private void assertStoryValues(EStory expected, Story actual) {
         Assertions.assertEquals(expected.getId(), actual.getId());
         Assertions.assertEquals(expected.getTitle(), actual.getTitle());
         Assertions.assertEquals(expected.getSubtitle(), actual.getSubtitle());
@@ -77,39 +64,27 @@ class StoryMapperTest {
         Assertions.assertEquals(expected.getAuthor(), actual.getAuthor());
         Assertions.assertEquals(expected.getCreationDate(), actual.getCreationDate());
         Assertions.assertEquals(expected.getApprovationDate(), actual.getApprovationDate());
-        if(hasCategories)
-            Assertions.assertEquals(expected.getCategories().size(), actual.getCategories().size());
-        else
-            Assertions.assertNull(actual.getCategories());
-        Assertions.assertEquals(expected.getAge(), actual.getAge());
+        Assertions.assertEquals(expected.getCategories(), actual.getCategories());
     }
 
-    private void assertEStoryValues(StorySearch expected, EStory actual, boolean hasCategories) {
+    private void assertEStoryValues(StorySearch expected, EStory actual) {
         Assertions.assertEquals(expected.getTitle(), actual.getTitle());
         Assertions.assertEquals(expected.getSubtitle(), actual.getSubtitle());
         Assertions.assertEquals(expected.getText(), actual.getText());
         Assertions.assertEquals(expected.getAuthor(), actual.getAuthor());
-        if(hasCategories)
-            Assertions.assertEquals(expected.getCategories().size(), actual.getCategories().size());
-        else
-            Assertions.assertNull(actual.getCategories());
-        Assertions.assertEquals(expected.getAge(), actual.getAge());
+        Assertions.assertEquals(expected.getCategories(), actual.getCategories());
     }
 
-    private void assertEStoryValues(StoryPost expected, EStory actual, boolean hasCategories) {
+    private void assertEStoryValues(StoryPost expected, EStory actual) {
         Assertions.assertEquals(expected.getTitle(), actual.getTitle());
         Assertions.assertEquals(expected.getSubtitle(), actual.getSubtitle());
         Assertions.assertEquals(expected.getText(), actual.getText());
         Assertions.assertEquals(expected.getAuthor(), actual.getAuthor());
-        if(hasCategories)
-            Assertions.assertEquals(expected.getCategories().size(), actual.getCategories().size());
-        else
-            Assertions.assertNull(actual.getCategories());
-        Assertions.assertEquals(expected.getAge(), actual.getAge());
+        Assertions.assertEquals(expected.getCategories(), actual.getCategories());
     }
 
     @NotNull
-    private EStory createEStory(boolean addCategories) {
+    private EStory createEStory() {
         return EStory
                 .builder()
                 .id(UUID.randomUUID())
@@ -120,26 +95,24 @@ class StoryMapperTest {
                 .creationDate(LocalDateTime.now())
                 .approvationDate(LocalDateTime.now())
                 .active(true)
-                .categories(addCategories ? List.of("category") : null)
-                .age("age")
+                .categories("category")
                 .build();
     }
 
     @NotNull
-    private StorySearch createStorySearch(boolean addCategories) {
+    private StorySearch createStorySearch() {
         return StorySearch
                 .builder()
                 .title("title")
                 .subtitle("subtitle")
                 .text("text")
                 .author("author")
-                .categories(addCategories ? List.of("category") : null)
-                .age("age")
+                .categories("category")
                 .build();
     }
 
     @NotNull
-    private StoryPost createStoryPost(boolean addCategories) {
+    private StoryPost createStoryPost() {
         return StoryPost
                 .builder()
                 .title("title")
@@ -148,8 +121,7 @@ class StoryMapperTest {
                 .author("author")
                 .creationDate(LocalDateTime.now())
                 .approvationDate(LocalDateTime.now())
-                .categories(addCategories ? List.of("category") : null)
-                .age("age")
+                .categories("category")
                 .build();
     }
 }

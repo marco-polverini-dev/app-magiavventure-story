@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,7 +54,6 @@ public class StoryService {
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404)));
     }
 
-    @SuppressWarnings("unchecked")
     private Example<EStory> getExample(EStory probe) {
         return Example.of(probe, ExampleMatcher
                 .matching()
@@ -63,17 +61,9 @@ public class StoryService {
                 .withMatcher("title", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("subtitle", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("text", ExampleMatcher.GenericPropertyMatcher::contains)
-                .withMatcher("categories", matcher -> matcher
-                        .transform(source -> {
-                            if(source.isPresent()) {
-                                var categories = (List<String>) source.get();
-                                return Optional.of(String.join(",", categories));
-                            }
-                            return Optional.empty();
-                        })
-                        .contains())
-                .withMatcher("age", ExampleMatcher.GenericPropertyMatcher::contains)
+                .withMatcher("categories", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("author", ExampleMatcher.GenericPropertyMatcher::contains)
+                .withMatcher("active", ExampleMatcher.GenericPropertyMatcher::exact)
         );
     }
 }

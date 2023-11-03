@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -28,8 +27,7 @@ public class EStory {
     private LocalDateTime creationDate;
     private LocalDateTime approvationDate;
     private Boolean active;
-    private List<String> categories;
-    private String age;
+    private String categories;
 
     public EStory generateId() {
         this.setId(UUID.randomUUID());

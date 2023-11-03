@@ -33,7 +33,7 @@ class StoryOperationTest {
                 .thenReturn(page);
 
         var stories = storyOperation.searchStories(0, "title", "subtitle",
-                "text", "author", "category", "age");
+                "text", "author", "category");
 
         Mockito.verify(storyService).findAll(Mockito.anyInt(), Mockito.any());
 
@@ -79,8 +79,7 @@ class StoryOperationTest {
         Assertions.assertEquals("subtitle", story.getSubtitle());
         Assertions.assertEquals("text", story.getText());
         Assertions.assertEquals("author", story.getAuthor());
-        Assertions.assertEquals("age", story.getAge());
-        Assertions.assertEquals(1, story.getCategories().size());
+        Assertions.assertEquals("category", story.getCategories());
     }
 
     @NotNull
@@ -91,7 +90,7 @@ class StoryOperationTest {
                 .text("text")
                 .author("author")
                 .creationDate(LocalDateTime.now())
-                .categories(List.of("category"))
+                .categories("category")
                 .build();
     }
 
@@ -104,8 +103,7 @@ class StoryOperationTest {
                 .subtitle("subtitle")
                 .text("text")
                 .author("author")
-                .categories(List.of("category"))
-                .age("age")
+                .categories("category")
                 .build();
     }
 
