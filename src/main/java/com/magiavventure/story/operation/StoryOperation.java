@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @RestController()
@@ -27,16 +25,15 @@ public class StoryOperation {
                                      @RequestParam(required = false) String subtitle,
                                      @RequestParam(required = false) String text,
                                      @RequestParam(required = false) String author,
-                                     @RequestParam(required = false) String category,
-                                     @RequestParam(required = false) String age) {
+                                     @RequestParam(required = false) String category) {
         return storyService.findAll(pageNumber, StorySearch
                 .builder()
                 .title(title)
                 .subtitle(subtitle)
                 .text(text)
                 .author(author)
-                .categories(Objects.nonNull(category) ? List.of(category) : null)
-                .age(age)
+                .categories(category)
+                .active(Boolean.TRUE)
                 .build());
     }
 

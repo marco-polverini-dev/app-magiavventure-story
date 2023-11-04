@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class StoryService {
 
     public Story saveStory(StoryPost storyPost) {
         return Optional.ofNullable(storyMapper.mapPost(storyPost))
-                .map(this::generateId)
+                .map(EStory::generateId)
                 .map(storyRepository::save)
                 .map(storyMapper::map)
                 .orElseThrow(() -> new HttpServerErrorException(HttpStatusCode.valueOf(500)));
@@ -41,27 +40,18 @@ public class StoryService {
                 Sort.by(Sort.Direction.valueOf(pageableProperties.getSort().getDirection()),
                         pageableProperties.getSort().getProperties()));
         var probe = storyMapper.mapSearch(storySearch);
-        return storyRepository.findAll(getExample(probe), pageable).map(storyMapper::map);
+        return storyRepository
+                .findAll(getExample(probe), pageable)
+                .map(storyMapper::map);
     }
 
     public Story findById(UUID id) {
         return storyRepository
                 .findById(id)
                 .map(storyMapper::map)
-                .map(story -> {
-                    log.error(String.join(",", story.getCategories()));
-                    return story;
-                })
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatusCode.valueOf(404)));
     }
 
-    private EStory generateId(EStory eStory) {
-        eStory.setId(UUID.randomUUID());
-        eStory.setActive(Boolean.TRUE);
-        return eStory;
-    }
-
-    @SuppressWarnings("unchecked")
     private Example<EStory> getExample(EStory probe) {
         return Example.of(probe, ExampleMatcher
                 .matching()
@@ -69,17 +59,9 @@ public class StoryService {
                 .withMatcher("title", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("subtitle", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("text", ExampleMatcher.GenericPropertyMatcher::contains)
-                .withMatcher("categories", matcher -> matcher
-                        .transform(source -> {
-                            if(source.isPresent()) {
-                                var categories = (List<String>) source.get();
-                                return Optional.of(String.join(",", categories));
-                            }
-                            return Optional.empty();
-                        })
-                        .contains())
-                .withMatcher("age", ExampleMatcher.GenericPropertyMatcher::contains)
+                .withMatcher("categories", ExampleMatcher.GenericPropertyMatcher::contains)
                 .withMatcher("author", ExampleMatcher.GenericPropertyMatcher::contains)
+                .withMatcher("active", ExampleMatcher.GenericPropertyMatcher::exact)
         );
     }
 }

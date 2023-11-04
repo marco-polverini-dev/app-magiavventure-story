@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 
-import java.util.List;
-
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,7 +14,7 @@ public class StorySearch {
     private String subtitle;
     private String text;
     private String author;
-    private List<String> categories;
-    private String age;
+    private String categories;
+    private Boolean active;
 
 }

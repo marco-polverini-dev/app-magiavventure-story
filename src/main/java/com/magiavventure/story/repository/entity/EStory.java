@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -25,10 +24,15 @@ public class EStory {
     private String subtitle;
     private String text;
     private String author;
-    private Date creationDate;
-    private Date approvationDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime approvationDate;
     private Boolean active;
-    private List<String> categories;
-    private String age;
+    private String categories;
+
+    public EStory generateId() {
+        this.setId(UUID.randomUUID());
+        this.setActive(Boolean.TRUE);
+        return this;
+    }
 
 }
