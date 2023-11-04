@@ -2,8 +2,7 @@
 # BUILD STAGE
 #
 FROM gradle:8.3.0-jdk17 AS build
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
+COPY . .
 RUN gradle clean bootJar --no-daemon
 
 #
