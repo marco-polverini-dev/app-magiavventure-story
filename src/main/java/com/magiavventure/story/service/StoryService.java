@@ -40,7 +40,9 @@ public class StoryService {
                 Sort.by(Sort.Direction.valueOf(pageableProperties.getSort().getDirection()),
                         pageableProperties.getSort().getProperties()));
         var probe = storyMapper.mapSearch(storySearch);
-        return storyRepository.findAll(getExample(probe), pageable).map(storyMapper::map);
+        return storyRepository
+                .findAll(getExample(probe), pageable)
+                .map(storyMapper::map);
     }
 
     public Story findById(UUID id) {
